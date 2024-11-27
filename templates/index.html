@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>API Button Interface</title>
+    <style>
+      .api-button {
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Simple Use Case</h1>
+    <button class="api-button" onclick="callApi(1)">START</button>
+    <br />
+    <br />
+    <button class="api-button" onclick="callApi(2)">
+      I'm looking for a new pair of glasses.
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(3)">
+      So I do wear my glasses all day at the computer but also I want something
+      stylish for going out. I am looking for something that is modern. I like
+      bold frames and bright colors.
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(4)">
+      OK. I really like the 3rd one. Can you tell me more about them?
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(5)">
+      OK. How much are these frames and do you have them in stock? How long will
+      it take to get them readied?
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(6)">No, that's all.</button>
+    <br />
+    <br />
+    <br />
+    <h1>Advanced Use Case - virtual try on</h1>
+    <button class="api-button" onclick="callApi(1)">START</button>
+    <br />
+    <br />
+    <button class="api-button" onclick="callApi(2)">
+      I'm looking for a new pair of glasses.
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(101)">
+      So I do wear my glasses all day at the computer but also I want something
+      stylish for going out. I am looking for something that is modern. I like
+      bold frames and bright colors.
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(102)">
+      The second one please
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(103)">And the third one</button>
+    <br />
+    <button class="api-button" onclick="callApi(4)">
+      OK. I really like the 3rd one. Can you tell me more about them?
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(5)">
+      OK. How much are these frames and do you have them in stock? How long will
+      it take to get them readied?
+    </button>
+    <br />
+    <button class="api-button" onclick="callApi(6)">No, that's all.</button>
+    <script>
+      function callApi(buttonId) {
+        fetch(`/call_api/${buttonId}`)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const audioUrl = URL.createObjectURL(blob);
+            const audio = new Audio(audioUrl);
+            audio.play();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred while calling the API");
+          });
+      }
+    </script>
+  </body>
+</html>
